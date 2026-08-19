@@ -270,6 +270,7 @@ name = "excelautoemailer"
 version = "0.1.0"
 dependencies = [
  "mail-send",
+ "tokio",
 ]
 
 [[package]]
