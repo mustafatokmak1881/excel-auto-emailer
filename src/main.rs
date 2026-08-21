@@ -8,11 +8,18 @@ use std::fs;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>> {
-    let my_dir : &str = "excelfilesx";
+    let my_dir: &str = "excel-dosyalari-buraya";
+    let my_email_list: &str =  "eposta-listesi.txt";
 
-    let exists: bool = Path::new(my_dir).is_dir();
-    if !exists {
-        fs::create_dir(my_dir);
+    let excel_dir: bool = Path::new(my_dir).is_dir();
+    let email_list_file = fs::exists(my_email_list).expect("File didn't create");
+
+    if !excel_dir {
+        let _ = fs::create_dir(my_dir);
+    }
+
+    if !email_list_file {
+        let _ = fs::File::create(my_email_list);
     }
 
     let paths = fs::read_dir(my_dir)?;
