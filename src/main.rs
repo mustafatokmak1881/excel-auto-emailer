@@ -12,7 +12,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
     let my_email_list: &str =  "eposta-listesi.txt";
 
     let excel_dir: bool = Path::new(my_dir).is_dir();
-    let email_list_file = fs::exists(my_email_list).expect("File didn't create");
+    let email_list_file: bool = fs::exists(my_email_list)?;
 
     if !excel_dir {
         let _ = fs::create_dir(my_dir);
