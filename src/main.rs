@@ -22,10 +22,22 @@ async fn main() -> Result<(), Box<dyn Error>> {
         let _ = fs::File::create(my_email_list);
     }
 
+    let email_list: String = fs::read_to_string(my_email_list)?;
+    let binding = &email_list;
+    let emails: Vec<&str> = binding.split("\r\n").collect();
+    println!("Email list: {:?}", emails);
+
     let paths = fs::read_dir(my_dir)?;
+
     for path in paths {
-        let item: String = path?.path().display().to_string();
-        println!("dir: {}", item);
+        let excel_file_path: &str = &path?.path().display().to_string();
+        let is_excel_file: bool = excel_file_path.contains(".xls");
+
+        if is_excel_file {
+            let excel_file = fs::read(excel_file_path)?;
+            //println!("excel file: {:?}", excel_file);
+        }
+     
     }
 
     //let result = send("mtkmk1881@gmail.com", "M3rhabaaaa", "<html style='background-color:grey'>Html Alanı buraya ya şş</html>").await;
